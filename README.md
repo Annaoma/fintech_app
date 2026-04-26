@@ -1,3 +1,4 @@
+
 # Xend Finance App
 
 ## Created by
@@ -28,3 +29,6 @@ The purpose of this app is to simulate a digital banking and crypto-finance plat
 
 ## Submission
 This project was submitted through GitHub for academic assessment.
+=======
+# fintech_app
+
