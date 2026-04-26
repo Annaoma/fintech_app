@@ -1,11 +1,10 @@
 import { useState } from "react";
-import {
-  View, Text, ScrollView, StyleSheet,
-  TouchableOpacity, SafeAreaView
-} from "react-native";
+import {View, Text, ScrollView, StyleSheet, TouchableOpacity, SafeAreaView} from "react-native";
 import { Ionicons, MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from "@expo/vector-icons";
 import { SupportChatButton } from "@/components/xend/SupportChatButton";
+import { useRouter } from "expo-router";
 
+const router = useRouter
 const QUICK_ACTIONS = [
   { id: "bank", label: "To Bank", badge: "NEW" },
   { id: "withdraw", label: "Withdraw", badge: null },
@@ -28,7 +27,7 @@ function ActionIcon({ id }: { id: string }) {
     case "bank": return <FontAwesome5 name="university" {...props} />;
     case "withdraw": return <Ionicons name="arrow-down-circle-outline" {...props} />;
     case "save": return <MaterialCommunityIcons name="piggy-bank-outline" {...props} />;
-    case "invest": return <Ionicons name="trending-up-outline" {...props} />;
+    case "invest": return <MaterialCommunityIcons name="hand-coin-outline" {...props} />;
     case "yield": return <Ionicons name="pulse-outline" {...props} />;
     case "swap": return <Ionicons name="swap-vertical-outline" {...props} />;
     default: return null;
@@ -66,32 +65,47 @@ export default function HomeScreen() {
 
         <View style={s.balanceCard}>
           <View style={s.balanceCardHeader}>
-            <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", gap: 6 }}></TouchableOpacity>
-            <Text style={s.balanceLabel}>PORTFOLIO BALANCE</Text>
-            <Text style={s.txText}>Transaction History</Text>
-            <TouchableOpacity onPress={() => setShowBalance(!showBalance)}>
-              <Ionicons
-                name={showBalance ? "eye-off-outline" : "eye-outline"}
-                size={20}
-                color="#fff"
-                
-              />
-            </TouchableOpacity>
-          </View>
 
+  
+        <View style={s.leftHeader}>
+          <Text style={s.balanceLabel}>PORTFOLIO BALANCE</Text>
+
+          <TouchableOpacity onPress={() => setShowBalance(!showBalance)}>
+            <Ionicons
+              name={showBalance ? "eye-off-outline" : "eye-outline"}
+              size={18}
+              color="#fff"
+            />
+          </TouchableOpacity>
+        </View>
+
+        
+        <TouchableOpacity style={s.txButton}>
+          <Text style={s.txText}>Transaction History</Text>
+
+          <Ionicons
+            name="chevron-forward"
+            size={16}
+            color="#fff"
+          />
+        </TouchableOpacity>
+
+      </View>
           <Text style={s.hiddenBalance}>
-            {showBalance ? "$1,234,567" : "* * * * * * * *"}
+            {showBalance ? "* * * * * * * * " : "$1,234,567" }
           </Text>
 
-          <View style={s.savingsCard}>
+          
+            <View style={s.curve} />
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
               <View style={s.savingsIcon}>
-                <MaterialIcons name="savings" size={20} color="#2040c8" />
+                <MaterialCommunityIcons name="sprout-outline"size={28}color="#1E40FF"/>
               </View>
-              <View>
+            <View>
+             
                 <Text style={s.savingsTitle}>Total Savings</Text>
                 <Text style={s.savingsAmount}>
-                  {showBalance ? "₦300,000" : "* * * * * *"}
+                  {showBalance ? "* * * * * * " : "$300,000"}
                 </Text>
               </View>
             </View>
@@ -101,7 +115,7 @@ export default function HomeScreen() {
               <Ionicons name="chevron-forward" size={13} color="#2040c8" />
             </TouchableOpacity>
           </View>
-        </View>
+        
 
         <Text style={s.sectionTitle}>QUICK ACTIONS</Text>
 
@@ -148,8 +162,8 @@ export default function HomeScreen() {
 }
 
 const s = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#0e0e14" },
-  scroll: { paddingHorizontal: 16, paddingBottom: 100 },
+  container: { flex: 1, backgroundColor: "#0e0e14", },
+  scroll: { paddingHorizontal: 16, paddingBottom: 100, paddingTop: 30},
 
   header: {
     flexDirection: "row",
@@ -166,7 +180,7 @@ const s = StyleSheet.create({
     borderRadius: 25,
     backgroundColor: "#2e2e33",
     borderWidth: 1.5,
-    borderColor: "#3535ca",
+    borderColor: "#2040c8",
     alignItems: "center",
     justifyContent: "center"
   },
@@ -175,12 +189,15 @@ const s = StyleSheet.create({
   subGreeting: { color: "#6b7280", fontSize: 14 },
 
   balanceCard: {
-    backgroundColor: "#2040c8",
-    borderRadius: 18,
-    padding: 20,
-    marginBottom: 22,
-    marginHorizontal: -4
-  },
+  backgroundColor: "#2040c8",
+  borderRadius: 15,
+  padding: 20,
+  marginBottom: 22,
+  marginHorizontal: -4,
+  borderBottomWidth: 75,
+  borderBottomColor: "#eaf3ff",
+  height: 175
+},
 
   balanceCardHeader: {
     flexDirection: "row",
@@ -190,24 +207,26 @@ const s = StyleSheet.create({
 
   balanceLabel: {
     color: "#fff",
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: "700"
   },
 
   hiddenBalance: {
     color: "#fff",
-    fontSize: 30,
-    fontWeight: "700",
+    fontSize: 25,
+    fontWeight: "800",
     marginVertical: 10
   },
 
   savingsIcon: {
     width: 38,
     height: 38,
-    borderRadius: 10,
+    borderRadius: 5,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    top: 30,
+    right: 10
   },
 
   savingsCard: {
@@ -216,31 +235,50 @@ const s = StyleSheet.create({
     padding: 12,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    width: 300,
+    height: 80,
+    
   },
+
+  savingsTitle: { color: "#2040c8", fontSize: 16, fontWeight: "600", top : 30, right: 10},
+  savingsAmount: { color: "#2040c8", fontSize: 20, top: 31},
+
+
+  curve: {
+  position: "absolute",
+  top: 90,
+  right: 10,
+  width: 100,
+  height: 10,
+  backgroundColor: "#fff",
+  borderTopLeftRadius: 30,
+  borderTopRightRadius: 30,
+},
 
   txText: {
   color: "#fff",
   fontSize: 12
 },
 
-  savingsTitle: { color: "#111", fontSize: 16, fontWeight: "600" },
-  savingsAmount: { color: "#2040c8", fontSize: 20},
-
+  
   plansBtn: {
     flexDirection: "row",
     alignItems: "center",
     borderColor: "#2040c8",
     borderWidth: 1.5,
     borderRadius: 20,
-    paddingHorizontal: 12,
-    paddingVertical: 5
+    paddingHorizontal: 14,
+    paddingVertical: 5,
+    top: 0,
+    width: 75,
+    right: -205
   },
 
   plansBtnText: { color: "#2040c8", fontSize: 14},
 
   sectionTitle: {
-    color: "#6b7280",
+    color: "#cccfd4",
     fontSize: 14,
     fontWeight: "700",
     marginBottom: 14
@@ -286,10 +324,11 @@ const s = StyleSheet.create({
 
   badgeFire: {
     position: "absolute",
-    top: -10,
-    right: 7,
-    fontSize: 24,
-    zIndex: 10
+    top: -9,
+    right: 9,
+    fontSize: 18,
+    zIndex: 10,
+    
   },
 
   todoList: { gap: 10 },
@@ -310,6 +349,18 @@ const s = StyleSheet.create({
     borderColor: "#2040c8",
     borderRadius: 5
   },
+
+  leftHeader: {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 8,
+},
+
+txButton: {
+  flexDirection: "row",
+  alignItems: "center",
+  gap: 4,
+},
 
   checkboxActive: {
     backgroundColor: "#2040c8"

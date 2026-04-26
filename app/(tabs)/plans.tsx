@@ -85,10 +85,10 @@ export default function PlansScreen() {
 
 const s = StyleSheet.create({
   container:          { flex: 1, backgroundColor: "#0e0e14" },
-  scroll:             { paddingHorizontal: 20, paddingBottom: 100 },
+  scroll:             { paddingHorizontal: 20, paddingBottom: 100, paddingTop: 40 },
 
   // Title
-  pageTitle:          { color: "#fff", fontSize: 28, fontWeight: "800",
+  pageTitle:          { color: "#fff", fontSize: 40, fontWeight: "800",
                         marginTop: 8, marginBottom: 20, letterSpacing: -0.3 },
 
   // Blue savings card
@@ -101,7 +101,7 @@ const s = StyleSheet.create({
 
   // Action cards row
   actionRow:          { flexDirection: "row", gap: 12, marginBottom: 22 },
-  actionCard:         { flex: 1, backgroundColor: "#101013",
+  actionCard:         { flex: 1, backgroundColor: "#64647449",
                         borderRadius: 14, padding: 16 },
   actionCardOrange:   { borderWidth: 1.5, borderColor: "#f97316" },
   actionCardBlue:     { borderWidth: 1.5, borderColor: "#2040c8" },
@@ -118,7 +118,7 @@ const s = StyleSheet.create({
 
   // Savings plan cards
   savingsRow:         { flexDirection: "row", gap: 12, marginBottom: 24 },
-  miniCard:           { flex: 1, backgroundColor: "#13131a", borderRadius: 14, padding: 16 },
+  miniCard:           { flex: 1, backgroundColor: "#262627", borderRadius: 14, padding: 16 },
   miniCardLabel:      { color: "#dee0e2", fontSize: 9, fontWeight: "700",
                         letterSpacing: 1.2, marginBottom: 8 },
   miniCardAmount:     { color: "#fff", fontSize: 22, fontWeight: "700",

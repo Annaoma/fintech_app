@@ -1,235 +1,273 @@
-import { useState } from "react";
+import React from "react";
 import {
-  View, Text, ScrollView, StyleSheet,
-  TouchableOpacity, SafeAreaView, Switch
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  TouchableOpacity,
+  ScrollView,
 } from "react-native";
-import { Ionicons, MaterialIcons, Feather } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { Ionicons, Feather, MaterialIcons } from "@expo/vector-icons";
+import { SupportChatButton } from "@/components/xend/SupportChatButton";
 
-const SETTINGS_ROWS = [
-  {
-    id: "account",
-    icon: "person-outline",
-    iconLib: "ion",
-    title: "Account Settings",
-    subtitle: "Edit your profile and next of kin",
-    type: "chevron",
-    route: "/account-settings",
-  },
-  {
-    id: "phone",
-    icon: "shield-outline",
-    iconLib: "ion",
-    title: "Verify Phone Number",
-    subtitle: "Enable OTP notifications",
-    type: "chevron",
-    route: "/verify-phone",
-  },
-  {
-    id: "kyc",
-    icon: "card-outline",
-    iconLib: "ion",
-    title: "KYC Verification",
-    subtitle: "Complete your KYC",
-    type: "chevron",
-    route: "/kyc",
-  },
-  {
-    id: "support",
-    icon: "chatbubble-outline",
-    iconLib: "ion",
-    title: "Support",
-    subtitle: "Chat with our support agents",
-    type: "chevron",
-    route: "/support",
-  },
-  {
-    id: "biometrics",
-    icon: "finger-print",
-    iconLib: "ion",
-    title: "Biometrics",
-    subtitle: "Enable Secure Login",
-    type: "toggle",      // ← renders a Switch, not a chevron
-    route: null,
-  },
-  {
-    id: "security",
-    icon: "shield-checkmark-outline",
-    iconLib: "ion",
-    title: "Security",
-    subtitle: "Add an extra layer of security",
-    type: "chevron",
-    route: "/security",
-  },
-];
-
-// ── Component ─────────────────────────────────────────────────────────────────
-
-export default function MoreScreen() {
-  const router = useRouter();
-  const [biometrics, setBiometrics] = useState(false); // toggle state
-
+export default function ReferralScreen() {
   return (
-    <SafeAreaView style={s.container}>
-      <ScrollView showsVerticalScrollIndicator={false}
-        contentContainerStyle={s.scroll}>
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        contentContainerStyle={styles.scroll}
+      >
+        <View style = {styles.top}>
+          <SupportChatButton/>
+        </View>
 
-        {/* ── HEADER ─────────────────────────────────────────── */}
-        <View style={s.headerRow}>
-          <Text style={s.pageTitle}>Account</Text>
-          {/* 3-dot vertical menu */}
-          <TouchableOpacity style={s.dotsBtn}>
-            <Ionicons name="ellipsis-vertical" size={20} color="#9ca3af" />
+        {/* Title */}
+        <Text style={styles.title}>Referral</Text>
+
+        <Text style={styles.subtitle}>
+          Share your code and earn rewards with every{"\n"}
+          friend who joins.
+        </Text>
+
+        {/* Rewards Card */}
+        <View style={styles.rewardCard}>
+          <View style={styles.rewardIconBox}>
+            <Feather name="gift" size={24} color="#2040C8" />
+          </View>
+
+          <View style={styles.rewardTextBox}>
+            <Text style={styles.rewardTitle}>Rewards</Text>
+            <Text style={styles.rewardSubtitle}>
+              Let's grow together — refer your' friends{"\n"}
+              and family with your referral code.
+            </Text>
+          </View>
+        </View>
+
+        {/* Referral Code Card */}
+        <View style={styles.codeCard}>
+          <Text style={styles.codeLabel}>Your referral code</Text>
+
+          <Text style={styles.codeValue}>XEND-ANNA</Text>
+
+          <TouchableOpacity style={styles.copyRow}>
+            <MaterialIcons
+              name="content-copy"
+              size={16}
+              color="#2D4BE0"
+            />
+            <Text style={styles.copyText}>Copy code</Text>
           </TouchableOpacity>
         </View>
 
-        {/* ── PROFILE ROW ────────────────────────────────────── */}
-        <View style={s.profileRow}>
-          <View style={s.profileLeft}>
-            <View style={s.profileAvatar}>
-              <Ionicons name="person-outline" size={24} color="#6b7280" />
-            </View>
-            <Text style={s.profileName}>@Anna_Chris</Text>
+        {/* Stats */}
+        <View style={styles.statsRow}>
+          <View style={styles.statCard}>
+            <Text style={styles.statNumber}>0</Text>
+            <Text style={styles.statLabel}>Referrals</Text>
           </View>
-          {/* Copy username button */}
-          <TouchableOpacity style={s.copyBtn}>
-            <Ionicons name="copy-outline" size={20} color="#9ca3af" />
-          </TouchableOpacity>
+
+          <View style={styles.statCard}>
+            <Text style={styles.statNumber}>0</Text>
+            <Text style={styles.statLabel}>Points</Text>
+          </View>
         </View>
 
-        {/* ── REFERRAL BANNER ────────────────────────────────── */}
-        <TouchableOpacity
-          style={s.referralBanner}
-          onPress={() => router.push("/(tabs)/referral")}
-          activeOpacity={0.85}
-        >
-          <View style={s.referralLeft}>
-            {/* Trophy icon in a frosted circle */}
-            <View style={s.referralIconBox}>
-              <MaterialIcons name="emoji-events" size={20} color="#fbbf24" />
-            </View>
-            <View>
-              <Text style={s.referralTitle}>Referral</Text>
-              <Text style={s.referralSubtitle}>Refer friends and earn points</Text>
-            </View>
-          </View>
-          {/* Frosted chevron circle */}
-          <View style={s.referralChevron}>
-            <Ionicons name="chevron-forward" size={14} color="#fff" />
-          </View>
+        {/* Share Button */}
+        <TouchableOpacity style={styles.shareBtn}>
+          <Text style={styles.shareBtnText}>Share invite link</Text>
         </TouchableOpacity>
-
-        {/* ── SETTINGS CARD ──────────────────────────────────── */}
-        {/* All 6 rows live inside one rounded card */}
-        <View style={s.settingsCard}>
-          {SETTINGS_ROWS.map((row, index) => (
-            <TouchableOpacity
-              key={row.id}
-              style={[
-                s.settingsRow,
-                // Add separator line under every row except the last
-                index < SETTINGS_ROWS.length - 1 && s.settingsRowBorder,
-              ]}
-              // Disable press feedback on toggle rows
-              activeOpacity={row.type === "toggle" ? 1 : 0.7}
-              onPress={() => {
-                if (row.type === "chevron" && row.route) {
-                  router.push(row.route as any);
-                }
-              }}
-            >
-              {/* Icon box */}
-              <View style={s.settingsIconBox}>
-                <Ionicons name={row.icon as any} size={18} color="#6b7280" />
-              </View>
-
-              {/* Text */}
-              <View style={s.settingsText}>
-                <Text style={s.settingsTitle}>{row.title}</Text>
-                <Text style={s.settingsSubtitle}>{row.subtitle}</Text>
-              </View>
-
-              {/* Right — either chevron or toggle */}
-              {row.type === "chevron" ? (
-                <View style={s.rowChevron}>
-                  <Ionicons name="chevron-forward" size={13} color="#9ca3af" />
-                </View>
-              ) : (
-                // Switch styled to match design — grey when off
-                <Switch
-                  value={biometrics}
-                  onValueChange={setBiometrics}
-                  trackColor={{ false: "#374151", true: "#2040c8" }}
-                  thumbColor="#ffffff"
-                  ios_backgroundColor="#374151"
-                />
-              )}
-            </TouchableOpacity>
-          ))}
-        </View>
-
       </ScrollView>
+
     </SafeAreaView>
   );
 }
 
-// ── Styles ────────────────────────────────────────────────────────────────────
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#070707",
+  },
 
-const s = StyleSheet.create({
-  container:          { flex: 1, backgroundColor: "#0e0e14" },
-  scroll:             { paddingHorizontal: 20, paddingBottom: 100 },
+  scroll: {
+    paddingHorizontal: 16,
+    paddingTop: 50,
+    paddingBottom: 120,
+    
+  },
+ top: {
+    position: 'absolute',
+    top: 50,
+    right: 18,
+  },
 
-  // Header
-  headerRow:          { flexDirection: "row", justifyContent: "space-between",
-                        alignItems: "center", marginTop: 8, marginBottom: 20 },
-  pageTitle:          { color: "#fff", fontSize: 30, fontWeight: "800",
-                        letterSpacing: -0.3 },
-  dotsBtn:            { width: 36, height: 36,
-                        alignItems: "center", justifyContent: "center" },
+  title: {
+    color: "#FFFFFF",
+    fontSize: 40,
+    fontWeight: "700",
+    marginTop: 6,
+  },
 
-  // Profile row
-  profileRow:         { flexDirection: "row", alignItems: "center",
-                        justifyContent: "space-between", marginBottom: 16 },
-  profileLeft:        { flexDirection: "row", alignItems: "center", gap: 12 },
-  profileAvatar:      { width: 48, height: 48, borderRadius: 24,
-                        backgroundColor: "#1e1e2e",
-                        borderWidth: 2, borderColor: "#5656cf",
-                        alignItems: "center", justifyContent: "center" },
-  profileName:        { color: "#fff", fontSize: 20, fontWeight: "700" },
-  copyBtn:            { width: 34, height: 34,
-                        alignItems: "center", justifyContent: "center" },
+  subtitle: {
+    color: "#A3A3A3",
+    fontSize: 15,
+    lineHeight: 24,
+    marginTop: 10,
+    marginBottom: 22,
+  },
 
-  // Referral banner
-  referralBanner:     { backgroundColor: "#2040c8", borderRadius: 14,
-                        padding: 16, flexDirection: "row",
-                        alignItems: "center", justifyContent: "space-between",
-                        marginBottom: 18 },
-  referralLeft:       { flexDirection: "row", alignItems: "center", gap: 14 },
-  referralIconBox:    { width: 38, height: 38, borderRadius: 10,
-                        backgroundColor: "rgba(255,255,255,0.15)",
-                        alignItems: "center", justifyContent: "center" },
-  referralTitle:      { color: "#fff", fontSize: 18, fontWeight: "700",
-                        marginBottom: 3 },
-  referralSubtitle:   { color: "#ffff", fontSize: 12 },
-  referralChevron:    { width: 28, height: 28, borderRadius: 14,
-                        backgroundColor: "rgba(255,255,255,0.2)",
-                        alignItems: "center", justifyContent: "center" },
+  rewardCard: {
+    backgroundColor: "#2847D8",
+    borderRadius: 14,
+    padding: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 16,
+  },
 
-  // Settings card
-  settingsCard:       { backgroundColor: "#13131a", borderRadius: 16,
-                        overflow: "hidden" },
-  settingsRow:        { flexDirection: "row", alignItems: "center",
-                        padding: 16, gap: 14 },
-  settingsRowBorder:  { borderBottomWidth: 1, borderBottomColor: "#1e1e2e" },
-  settingsIconBox:    { width: 36, height: 36, borderRadius: 10,
-                        backgroundColor: "#1a1a28",
-                        alignItems: "center", justifyContent: "center",
-                        flexShrink: 0 },
-  settingsText:       { flex: 1 },
-  settingsTitle:      { color: "#fff", fontSize: 14, fontWeight: "600",
-                        marginBottom: 2 },
-  settingsSubtitle:   { color: "#6b7280", fontSize: 11 },
-  rowChevron:         { width: 28, height: 28, borderRadius: 14,
-                        backgroundColor: "#1e1e2e",
-                        alignItems: "center", justifyContent: "center" },
+  rewardIconBox: {
+    width: 42,
+    height: 42,
+    borderRadius: 10,
+    backgroundColor: "#FFFFFF",
+    justifyContent: "center",
+    alignItems: "center",
+    marginRight: 12,
+  },
+
+  rewardTextBox: {
+    flex: 1,
+  },
+
+  rewardTitle: {
+    color: "#FFFFFF",
+    fontSize: 25,
+    fontWeight: "700",
+    marginBottom: 4,
+  },
+
+  rewardSubtitle: {
+    color: "#E5E7FF",
+    fontSize: 13,
+    lineHeight: 20,
+  },
+
+  codeCard: {
+    backgroundColor: "#2c2d2e",
+    borderRadius: 14,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: "#232323",
+    marginBottom: 16,
+  },
+
+  codeLabel: {
+    color: "#A1A1A1",
+    fontSize: 10,
+    marginBottom: 10,
+  },
+
+  codeValue: {
+    color: "#FFFFFF",
+    fontSize: 25,
+    fontWeight: "700",
+    letterSpacing: 1,
+    marginBottom: 12,
+  },
+
+  copyRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  copyText: {
+    color: "#2D4BE0",
+    fontSize: 14,
+    fontWeight: "600",
+    marginLeft: 8,
+  },
+
+  statsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 20,
+  },
+
+  statCard: {
+    width: "48%",
+    backgroundColor: "#393a3b",
+    borderRadius: 14,
+    paddingVertical: 20,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#232323",
+  },
+
+  statNumber: {
+    color: "#FFFFFF",
+    fontSize: 42,
+    fontWeight: "700",
+  },
+
+  statLabel: {
+    color: "#B3B3B3",
+    fontSize: 13,
+    marginTop: 4,
+  },
+
+  shareBtn: {
+    backgroundColor: "#2847D8",
+    borderRadius: 18,
+    height: 58,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  shareBtnText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "700",
+  },
+
+  bottomTab: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: "#111111",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    paddingTop: 12,
+    paddingBottom: 20,
+    borderTopWidth: 1,
+    borderTopColor: "#1F1F1F",
+  },
+
+  tabItem: {
+    alignItems: "center",
+    gap: 4,
+  },
+
+  tabText: {
+    color: "#8A8A8A",
+    fontSize: 11,
+  },
+
+  activeTab: {
+    width: 62,
+    height: 62,
+    borderRadius: 31,
+    backgroundColor: "#2847D8",
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: -28,
+    borderWidth: 3,
+    borderColor: "#FF8C00",
+  },
+
+  activeTabText: {
+    color: "#FFFFFF",
+    fontSize: 11,
+    marginTop: 2,
+  },
 });

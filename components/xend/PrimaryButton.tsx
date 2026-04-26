@@ -70,5 +70,5 @@ const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   label: { color: XendColors.white, fontSize: 16, fontWeight: '700' },
   labelOutline: { color: XendColors.white },
-  icon: { position: 'absolute', left: 150 },
+  icon: { position: 'absolute', left: 50 },
 });

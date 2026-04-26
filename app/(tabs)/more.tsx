@@ -172,12 +172,12 @@ export default function MoreScreen() {
 // ── Styles ────────────────────────────────────────────────────────────────────
 const s = StyleSheet.create({
   container:          { flex: 1, backgroundColor: "#0e0e14" },
-  scroll:             { paddingHorizontal: 20, paddingBottom: 100 },
+  scroll:             { paddingHorizontal: 20, paddingBottom: 100, paddingTop: 40 },
 
   // Header
   headerRow:          { flexDirection: "row", justifyContent: "space-between",
                         alignItems: "center", paddingTop: 10, paddingBottom: 14 },
-  pageTitle:          { color: "#fff", fontSize: 28, fontWeight: "800", letterSpacing: -0.3 },
+  pageTitle:          { color: "#fff", fontSize: 40, fontWeight: "800", letterSpacing: -0.3 },
   kebab:              { gap: 4, padding: 6, paddingHorizontal: 2 },
   kebabDot:           { width: 4, height: 4, borderRadius: 2, backgroundColor: "#9ca3af" },
 

@@ -7,9 +7,9 @@ import { Ionicons } from "@expo/vector-icons";
 
 const QUICK_ACTIONS = [
   { id: "add", label: "Add Fund", icon: "add" },
-  { id: "withdraw", label: "Withdraw", icon: "arrow-down-circle" },
+  { id: "withdraw", label: "Withdraw", icon: "arrow-down-circle-outline" },
   { id: "swap", label: "Swap", icon: "swap-vertical" },
-  { id: "statement", label: "Statement", icon: "document-text" },
+  { id: "statement", label: "Statement", icon: "document-text-outline" },
 ];
 
 const FILTER_TABS = ["Stablecoins", "Utility", "Memes 🔥"];
@@ -129,11 +129,11 @@ export default function WalletScreen() {
 
 const s = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#0e0e14" },
-  scroll: { paddingHorizontal: 20, paddingBottom: 100 },
+  scroll: { paddingHorizontal: 20, paddingBottom: 100, paddingTop: 40 },
 
-  pageTitle: { color: "#fff", fontSize: 28, fontWeight: "800", marginTop: 8, marginBottom: 18 },
+  pageTitle: { color: "#fff", fontSize: 40, fontWeight: "800", marginTop: 8, marginBottom: 18 },
 
-  portfolioCard: { backgroundColor: "#2040c8", borderRadius: 16, padding: 18, marginBottom: 18 },
+  portfolioCard: { backgroundColor: "#2040c8", borderRadius: 16, padding: 18, marginBottom: 18,},
   portfolioTop: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 12 },
   portfolioLabel: { color: "#fff", fontSize: 15, fontWeight: "600" },
   portfolioBalance: { color: "#fff", fontSize: 22, fontWeight: "700", letterSpacing: 4 },
@@ -143,7 +143,7 @@ const s = StyleSheet.create({
   actionBtnIcon: { width: 58, height: 58, borderRadius: 16, backgroundColor: "#e8eaeb", alignItems: "center", justifyContent: "center" },
   actionBtnLabel: { color: "#ffff", fontSize: 11, fontWeight: "500" },
 
-  filterRow: { flexDirection: "row", gap: 8, marginBottom: 20 },
+  filterRow: { flexDirection: "row", gap: 40, marginBottom: 20 },
   filterTab: { paddingHorizontal: 16, paddingVertical: 7, borderRadius: 20 },
   filterTabActive: { backgroundColor: "#2040c8" },
   filterTabInactive: { backgroundColor: "transparent" },

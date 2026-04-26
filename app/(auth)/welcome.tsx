@@ -56,7 +56,9 @@ export default function WelcomeScreen() {
       </View>
 
       {/* FOOTER — Trust signals */}
-      <TrustFooter />
+      <View>
+        <TrustFooter />
+      </View>
 
     </SafeAreaView>
   );
@@ -97,7 +99,8 @@ const styles = StyleSheet.create({
 
   top: {
     position: "absolute",
-    top: 16,
+    top: 45,
     right: 16,
   },
+
 });

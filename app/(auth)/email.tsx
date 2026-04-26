@@ -4,6 +4,7 @@ import { PrimaryButton } from '@/components/xend/PrimaryButton'
 import { router } from 'expo-router'
 import { TrustFooter } from '@/components/xend/TrustFooter'
 import { SupportChatButton } from '@/components/xend/SupportChatButton'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const Email = () => {
   return (
@@ -24,17 +25,19 @@ const Email = () => {
         </Text>
 
         <Text style={styles.label}>Email</Text>
-
+      <View>
+        <MaterialCommunityIcons name='email-outline'/>
         <TextInput 
-          
           placeholder="Enter your Email"
           placeholderTextColor="#888"
           style={styles.input}
           keyboardType="email-address"
           autoCapitalize="none"
+          
         />
+      </View>
 
-        <PrimaryButton
+        <PrimaryButton  
           label="Continue "
           onPress={() => router.push("/(auth)/login")}
           variant="navy"
@@ -59,7 +62,7 @@ const styles = StyleSheet.create({
 
   top: {
     position: 'absolute',
-    top: 16,
+    top: 60,
     right: 18,
   },
 
