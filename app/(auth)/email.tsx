@@ -4,7 +4,7 @@ import { PrimaryButton } from '@/components/xend/PrimaryButton'
 import { router } from 'expo-router'
 import { TrustFooter } from '@/components/xend/TrustFooter'
 import { SupportChatButton } from '@/components/xend/SupportChatButton'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons, MaterialIcons, } from '@expo/vector-icons'
 
 const Email = () => {
   return (
@@ -26,9 +26,8 @@ const Email = () => {
 
         <Text style={styles.label}>Email</Text>
       <View>
-        <MaterialCommunityIcons name='email-outline'/>
         <TextInput 
-          placeholder="Enter your Email"
+          placeholder="✉️ Enter your Email"
           placeholderTextColor="#888"
           style={styles.input}
           keyboardType="email-address"

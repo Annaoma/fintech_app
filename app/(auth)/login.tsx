@@ -29,7 +29,7 @@ export default function LoginScreen() {
         <View style={styles.avatar}>
           <Ionicons name="person" size={28} color="#fff" />
         </View>
-        <Text style={styles.welcomeText}>Welcome, Michael_Chuks</Text>
+        <Text style={styles.welcomeText}>Welcome, Anna_Chris</Text>
       </View>
 
       {/* Title */}
@@ -133,7 +133,8 @@ const styles = StyleSheet.create({
 
   welcomeText: {
     color: '#fff',
-    fontSize: 16,
+    fontSize: 20,
+
   },
 
   title: {

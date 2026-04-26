@@ -225,7 +225,7 @@ const s = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    top: 30,
+    top: 20,
     right: 10
   },
 
@@ -241,8 +241,8 @@ const s = StyleSheet.create({
     
   },
 
-  savingsTitle: { color: "#2040c8", fontSize: 16, fontWeight: "600", top : 30, right: 10},
-  savingsAmount: { color: "#2040c8", fontSize: 20, top: 31},
+  savingsTitle: { color: "#2040c8", fontSize: 16, fontWeight: "600", top : 20, right: 10},
+  savingsAmount: { color: "#2040c8", fontSize: 20, top: 20},
 
 
   curve: {
@@ -270,9 +270,10 @@ const s = StyleSheet.create({
     borderRadius: 20,
     paddingHorizontal: 14,
     paddingVertical: 5,
-    top: 0,
+    top: -18,
     width: 75,
-    right: -205
+    right: -220, 
+    
   },
 
   plansBtnText: { color: "#2040c8", fontSize: 14},
